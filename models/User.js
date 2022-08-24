@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema({
+  googleId: {
+    type: String,
+  },
   name: {
     type: String,
     required: true,
@@ -38,6 +41,4 @@ UserSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema); // end of UserSchema
