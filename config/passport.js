@@ -9,8 +9,10 @@ module.exports = function (passport) {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "/api/v1/auth/google/callback",
+        scope: ["email", "password", "profile"],
       },
       async (accessToken, refreshToken, profile, done) => {
+        console.log(profile);
         try {
           let user = await User.findOne({ googleId: profile.id });
 
@@ -21,7 +23,7 @@ module.exports = function (passport) {
               googleId: profile.id,
               name: profile.displayName,
               email: profile.email,
-              password: profile.emails[0].value,
+              password: profile.id,
             });
             done(null, user);
           }
