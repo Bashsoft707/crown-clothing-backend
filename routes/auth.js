@@ -9,7 +9,7 @@ authRouter.route("/register").post(register);
 
 authRouter.route("/login").post(login);
 
-authRouter.route("/logout").get(protect, logout);
+authRouter.route("/logout").get(logout);
 
 authRouter.route("/me").get(protect, getMe);
 

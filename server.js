@@ -1,6 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const authRouter = require("./routes/auth");
+const productRouter = require("./routes/products");
+const categoryRouter = require("./routes/categories");
 const errorHandler = require("./middleware/error");
 const connectDB = require("./config/db");
 const cookieParser = require("cookie-parser");
@@ -44,6 +46,8 @@ app.use(passport.session());
 app.use(cors());
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/products", productRouter);
+app.use("/api/v1/categories", categoryRouter);
 
 app.use(errorHandler);
 
