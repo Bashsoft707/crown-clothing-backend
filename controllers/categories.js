@@ -3,13 +3,13 @@ const Category = require("../models/Category");
 const ErrorResponse = require("../utils/errorResponse");
 
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find().populate("products");
+  const categories = await Category.find().populate("items");
 
   res.status(200).json({ success: true, data: categories });
 });
 
 exports.getCategory = asyncHandler(async (req, res, next) => {
-  const category = await Category.findById(req.params.id).populate("products");
+  const category = await Category.findById(req.params.id).populate("items");
 
   if (!category) {
     return next(

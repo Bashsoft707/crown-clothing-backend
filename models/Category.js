@@ -14,7 +14,12 @@ const CategorySchema = new mongoose.Schema(
   }
 );
 
-CategorySchema.virtual("products", {
+CategorySchema.pre("remove", async function (next) {
+  await this.model("Product").deleteMany({ category: this._id });
+  next();
+});
+
+CategorySchema.virtual("items", {
   ref: "Product",
   localField: "_id",
   foreignField: "Category",
