@@ -22,7 +22,7 @@ CategorySchema.pre("remove", async function (next) {
 CategorySchema.virtual("items", {
   ref: "Product",
   localField: "_id",
-  foreignField: "Category",
+  foreignField: "category",
   justOne: false,
 });
 
