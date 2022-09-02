@@ -5,7 +5,9 @@ const ErrorResponse = require("../utils/errorResponse");
 exports.getCategories = asyncHandler(async (req, res, next) => {
   const categories = await Category.find().populate("items");
 
-  res.status(200).json({ success: true, data: categories });
+  res
+    .status(200)
+    .json({ success: true, count: categories.length, data: categories });
 });
 
 exports.getCategory = asyncHandler(async (req, res, next) => {
@@ -57,6 +59,7 @@ exports.deleteCategory = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Category not found with id of ${req.params.id}`, 404)
     );
   }
+  dev;
 
   await category.remove();
 

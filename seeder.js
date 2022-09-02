@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 const Category = require("./models/Category");
+const Product = require("./models/Product");
 
 dotenv.config({ path: "./config/config.env" });
 
@@ -12,12 +13,16 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 const categories = JSON.parse(
-  fs.readFileSync(`${__dirname}/data/categories.json`, "utf8")
+  fs.readFileSync(`${__dirname}/_data/categories.json`, "utf8")
+);
+const products = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/products.json`, "utf8")
 );
 
 const importData = async () => {
   try {
     await Category.create(categories);
+    await Product.create(products);
     console.log("Data successfully imported!");
     process.exit();
   } catch (err) {
@@ -28,6 +33,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Category.deleteMany();
+    await Product.deleteMany();
     console.log("Data successfully deleted!");
     process.exit();
   } catch (err) {
