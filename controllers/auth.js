@@ -1,5 +1,5 @@
 const asyncHandler = require("../middleware/async");
-const User = require("../models/user.js");
+const User = require("../models/User");
 const ErrorResponse = require("../utils/errorResponse");
 
 exports.register = asyncHandler(async (req, res, next) => {
